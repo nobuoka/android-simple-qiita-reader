@@ -1,6 +1,7 @@
 package info.vividcode.android.sqr.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
         @field:SerializedName("id")
@@ -30,4 +31,4 @@ data class User(
                 "twitter_screen_name": "yaotti",
                 "website_url": "http://yaotti.hatenablog.com"
         */
-)
+) : Serializable

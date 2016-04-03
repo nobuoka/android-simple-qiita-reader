@@ -100,4 +100,19 @@ public class QiitaItemListPresentationModel {
                 });
     }
 
+    public interface InstanceStateSaver {
+        void save(List<QiitaItem> items, int currentPage, NextPageExistence nextPageExistence);
+    }
+
+    public void saveInstanceState(InstanceStateSaver saver) {
+        saver.save(mQiitaItems, mCurrentPage, mQiitaItemsHasNextPageBehaviorSubject.getValue());
+    }
+
+    public void restoreInstanceState(List<QiitaItem> items, int currentPage, NextPageExistence nextPageExistence) {
+        mQiitaItems.clear();
+        mQiitaItems.addAll(items);
+        mCurrentPage = currentPage;
+        mQiitaItemsHasNextPageBehaviorSubject.onNext(nextPageExistence);
+    }
+
 }

@@ -1,6 +1,8 @@
 package info.vividcode.android.sqr.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+import java.util.ArrayList
 
 data class QiitaItem(
         @SerializedName("id")
@@ -40,8 +42,8 @@ data class QiitaItem(
         var url: String,
 
         @SerializedName("tags")
-        var tags: List<Tag>,
+        var tags: ArrayList<Tag>,
 
         @SerializedName("user")
         var user: User
-)
+) : Serializable
