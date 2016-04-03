@@ -1,0 +1,64 @@
+[
+  {
+    "rendered_body": "<h1>準備</h1>",
+    "body": "# 準備",
+    "coediting": false,
+    "id": "9d9f9a2f78b013e7dd14",
+    "private": false,
+    "tags": [
+      { "name": "Electron", "versions": [] }
+    ],
+    "title": "Electron で何かを作る",
+    "url": "http://example.com/test-url-1",
+    "created_at": "2016-04-03T12:34:56+09:00",
+    "updated_at": "2016-04-03T12:34:56+09:00",
+    "user": {
+      "description": "",
+      "facebook_id": "",
+      "followees_count": 12,
+      "followers_count": 34,
+      "github_login_name": "test-taro",
+      "id": "test-taro",
+      "items_count": 56,
+      "linkedin_id": "",
+      "location": "",
+      "name": "テスト 太郎",
+      "organization": "なんとか株式会社",
+      "permanent_id": 10000,
+      "profile_image_url": "http://example.com/profile-image",
+      "twitter_screen_name": null,
+      "website_url": "http://example.com/test-taro"
+    }
+  },
+  {
+    "rendered_body": "<h1>何かをする</h1>",
+    "body": "# 何かをする",
+    "coediting": false,
+    "id": "9d9f9a2f78b013e7dd15",
+    "private": false,
+    "tags": [
+      { "name": "Android", "versions": [] }
+    ],
+    "title": "Android で何かをする",
+    "url": "http://example.com/test-url-2",
+    "created_at": "2016-04-03T10:00:00+09:00",
+    "updated_at": "2016-04-03T10:00:00+09:00",
+    "user": {
+      "description": "",
+      "facebook_id": "",
+      "followees_count": 12,
+      "followers_count": 34,
+      "github_login_name": "test-taro",
+      "id": "test-taro",
+      "items_count": 56,
+      "linkedin_id": "",
+      "location": "",
+      "name": "テスト 太郎",
+      "organization": "なんとか株式会社",
+      "permanent_id": 10000,
+      "profile_image_url": "http://example.com/profile-image",
+      "twitter_screen_name": null,
+      "website_url": "http://example.com/test-taro"
+    }
+  }
+]
