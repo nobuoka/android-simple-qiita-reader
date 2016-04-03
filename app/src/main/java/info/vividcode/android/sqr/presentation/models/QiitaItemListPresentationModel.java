@@ -28,11 +28,21 @@ public class QiitaItemListPresentationModel {
     private final Scheduler mMainScheduler;
     private final Scheduler mIoScheduler;
 
+    /**
+     *  現在のページ番号。
+     *  最初のページが 1。 0 はまだ 1 ページも読み込んでいない状態。
+     */
     private int mCurrentPage = 0;
 
+    /**
+     * 読み込み状態の変化を送出するための subject。
+     */
     private final BehaviorSubject<LoadingState> mQiitaItemsLoadingStateBehaviorSubject =
             BehaviorSubject.create(LoadingState.NOT_STARTED_YET);
 
+    /**
+     * 次ページの有無の変化を送出するための subject。
+     */
     private final BehaviorSubject<NextPageExistence> mQiitaItemsHasNextPageBehaviorSubject =
             BehaviorSubject.create(NextPageExistence.UNKNOWN);
 
