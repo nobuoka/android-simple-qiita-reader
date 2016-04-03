@@ -25,6 +25,8 @@ public class WebApiQiitaItemListLoader implements QiitaItemListLoader {
             @Override
             public void call(final SingleSubscriber<? super List<QiitaItem>> singleSubscriber) {
                 try {
+                    // TODO : ここで時間がかかっているので調査が必要。
+                    // HTTP のレスポンスが返ってきてから時間がかかっているので、JSON のパースなどで時間がかかってそう？
                     Response<List<QiitaItem>> response = mQiitaService.getItems().execute();
                     if (response.code() == 200) {
                         singleSubscriber.onSuccess(response.body());
