@@ -12,6 +12,10 @@ public class QiitaWebApiModule {
 
     private final String mQiitaServiceBaseUrl;
 
+    public static QiitaWebApiModule createFormalInstance() {
+        return new QiitaWebApiModule("https://qiita.com");
+    }
+
     public QiitaWebApiModule(String qiitaServiceBaseUrl) {
         mQiitaServiceBaseUrl = qiitaServiceBaseUrl;
     }
