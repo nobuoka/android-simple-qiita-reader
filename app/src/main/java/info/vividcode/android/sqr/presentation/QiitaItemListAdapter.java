@@ -28,11 +28,6 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
     public QiitaItemListAdapter() {
         super(VIEW_TYPES);
         setComponent(mQiitaItemListComponent);
-
-        // 仮のデータ。
-        ObservableList<QiitaItem> items = new ObservableArrayList<>();
-        items.addAll(Arrays.<QiitaItem>asList(null, null, null, null));
-        mQiitaItemListComponent.setList(items);
     }
 
     public ObservableListReferenceComponent<QiitaItem> getQiitaItemListReferenceComponent() {
