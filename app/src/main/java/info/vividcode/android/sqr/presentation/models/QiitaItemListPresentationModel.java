@@ -82,6 +82,8 @@ public class QiitaItemListPresentationModel {
                     public void onError(Throwable error) {
                         // TODO : エラーは Crashlytics などで記録するようにする？
 
+                        // TODO : エラーの内容に応じてメッセージを変える。
+                        // (API の利用制限に引っかかった場合にはその旨をユーザーに伝えるなど。)
                         mQiitaItemsLoadingStateBehaviorSubject.onNext(LoadingState.ERROR);
                     }
                 });
