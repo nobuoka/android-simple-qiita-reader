@@ -6,6 +6,8 @@ import info.vividcode.android.sqr.application.QiitaItemListLoader;
 import info.vividcode.android.sqr.infrastructure.webapi.QiitaService;
 import info.vividcode.android.sqr.infrastructure.webapi.QiitaServiceFactory;
 import info.vividcode.android.sqr.infrastructure.webapi.WebApiQiitaItemListLoader;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module
 public class QiitaWebApiModule {
@@ -21,8 +23,18 @@ public class QiitaWebApiModule {
     }
 
     @Provides
-    public QiitaService provideQiitaService() {
-        return QiitaServiceFactory.INSTANCE.createQiitaService(mQiitaServiceBaseUrl);
+    public OkHttpClient provideOkHttpClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        // TODO : デバッグ時のみログ出力するように。
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        return new OkHttpClient.Builder()
+                .addNetworkInterceptor(logging)
+                .build();
+    }
+
+    @Provides
+    public QiitaService provideQiitaService(OkHttpClient client) {
+        return QiitaServiceFactory.INSTANCE.createQiitaService(client, mQiitaServiceBaseUrl);
     }
 
     @Provides

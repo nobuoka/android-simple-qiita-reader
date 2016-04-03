@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import info.vividcode.android.sqr.dto.Tag;
 import info.vividcode.android.sqr.dto.QiitaItem;
 import info.vividcode.android.sqr.dto.User;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import rx.observers.TestSubscriber;
@@ -33,8 +34,9 @@ public class WebApiQiitaItemListLoaderTest {
         mMockWebServer = new MockWebServer();
         mMockWebServer.start();
 
+        OkHttpClient client = new OkHttpClient.Builder().build();
         mTestTargetLoader = new WebApiQiitaItemListLoader(
-                QiitaServiceFactory.INSTANCE.createQiitaService(mMockWebServer.url("").toString()));
+                QiitaServiceFactory.INSTANCE.createQiitaService(client, mMockWebServer.url("").toString()));
     }
 
     @After
