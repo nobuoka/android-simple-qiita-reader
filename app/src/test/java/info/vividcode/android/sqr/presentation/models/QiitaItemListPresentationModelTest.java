@@ -4,8 +4,8 @@ import android.databinding.ObservableList;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ExecutorService;
@@ -44,7 +44,7 @@ public class QiitaItemListPresentationModelTest {
             "2016-04-01T00:00:00+09:00",
             false,
             "http://example.com/test-1",
-            Collections.<Tag>emptyList(),
+            new ArrayList<Tag>(),
             new User("test-user", "test-taro", "http://exampl.com/profile-image", "", "")
     );
 
@@ -116,7 +116,6 @@ public class QiitaItemListPresentationModelTest {
 
             assertArrayEquals("読み込み状態変更のイベントはほかに発生していない。",
                     new Object[0], deq.toArray());
-
 
             model.requestToLoadNextPage();
             assertEquals("再度読み込みのリクエストを行うと LOADING 状態。",
