@@ -2,7 +2,6 @@ package info.vividcode.android.sqr.presentation.models;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 

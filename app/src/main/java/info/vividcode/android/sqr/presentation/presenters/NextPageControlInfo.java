@@ -19,4 +19,18 @@ public final class NextPageControlInfo {
                 NextPageControlViewType.PROGRESS);
     }
 
+    public boolean doShowErrorMessage() {
+        return viewType() == NextPageControlViewType.ERROR;
+    }
+
+    public boolean doShowProgress() {
+        return viewType() == NextPageControlViewType.PROGRESS;
+    }
+
+    public boolean doLoadAutomatically() {
+        return loadingState != LoadingState.LOADING &&
+                loadingState != LoadingState.ERROR &&
+                nextPageExistence != NextPageExistence.NOT_EXIST;
+    }
+
 }

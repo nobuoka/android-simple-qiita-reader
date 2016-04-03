@@ -9,11 +9,14 @@ import info.vividcode.android.sqr.presentation.models.LoadingState;
 import info.vividcode.android.sqr.presentation.models.NextPageExistence;
 import info.vividcode.android.sqr.presentation.models.QiitaItemListPresentationModel;
 import rx.Observable;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func2;
 
+/**
+ * 次ページ読み込みのための項目を扱う {@link info.vividcode.android.cra.Component}。
+ * TODO : 現在は {@link QiitaItemListPresentationModel} 専用になっているが、もっと汎用的にする。
+ */
 public final class NextPageControlComponent extends AbstractLeafComponent<NextPageControlInfo> {
 
     public NextPageControlComponent(
@@ -26,6 +29,9 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
 
     @Nullable
     private NextPageControlInfo mInfo = null;
+
+    @Nullable
+    private QiitaItemListPresentationModel mModel;
 
     @Override
     public int getItemCount() {
@@ -44,6 +50,7 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
     }
 
     public void subscribeToModel(QiitaItemListPresentationModel model) {
+        mModel = model;
         mSubscription = Observable.combineLatest(
                 model.getQiitaItemsLoadingStateChangeObservable(),
                 model.getQiitaItemsNextPageExistenceChangeObservable(),
@@ -66,6 +73,13 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
             mSubscription.unsubscribe();
             mSubscription = null;
         }
+    }
+
+    public void onRequestNextPage() {
+        if (mModel == null) return;
+        if (mInfo == null) return;
+
+        if (mInfo.doLoadAutomatically()) mModel.requestToLoadItems();
     }
 
 }

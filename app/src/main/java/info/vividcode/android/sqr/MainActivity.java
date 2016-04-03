@@ -28,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mAdapter = new QiitaItemListAdapter(new QiitaItemListAdapter.EventListeners() {
-            @Override
-            public void onRequestNextPage() {
-                mModel.requestToLoadItems();
-            }
-        });
+        mAdapter = new QiitaItemListAdapter();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(mAdapter);
     }

@@ -11,7 +11,6 @@ import info.vividcode.android.cra.FixedViewTypeBinderPairProvider;
 import info.vividcode.android.cra.components.ComponentSeries;
 import info.vividcode.android.cra.components.ObservableListReferenceComponent;
 import info.vividcode.android.sqr.dto.QiitaItem;
-import info.vividcode.android.sqr.presentation.models.LoadingState;
 import info.vividcode.android.sqr.presentation.presenters.NextPageControlComponent;
 import info.vividcode.android.sqr.presentation.presenters.NextPageControlInfo;
 import info.vividcode.android.sqr.presentation.viewholders.NextPageControlViewHolder;
@@ -38,16 +37,12 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
             new NextPageControlComponent(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.nextPageControl, new Binder<NextPageControlViewHolder, NextPageControlInfo>() {
                 @Override
                 public void bindViewHolder(NextPageControlViewHolder holder, Component<NextPageControlInfo> component, int positionInComponent) {
-                    //holder.binding;
-                    Log.d("xxx", "bindView holder control!!!");
+                    holder.binding.setInfo(component.getItem(positionInComponent));
                 }
             }));
 
-    private final EventListeners mEventListener;
-
-    public QiitaItemListAdapter(EventListeners eventListeners) {
+    public QiitaItemListAdapter() {
         super(VIEW_TYPES);
-        mEventListener = eventListeners;
 
         ComponentSeries cs = new ComponentSeries();
         cs.addChildComponent(mQiitaItemListComponent);
@@ -67,14 +62,8 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
         if (holder instanceof NextPageControlViewHolder) {
-            if (mQiitaItemListNextPageControlComponent.getItem(0).loadingState != LoadingState.LOADING) {
-                mEventListener.onRequestNextPage();
-            }
+            mQiitaItemListNextPageControlComponent.onRequestNextPage();
         }
-    }
-
-    public interface EventListeners {
-        void onRequestNextPage();
     }
 
 }
