@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +59,8 @@ public class WebApiQiitaItemListLoaderTest {
     public void getQiitaItemList_twoItemsArrayResponse() throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                this.getClass().getClassLoader().getResourceAsStream("web_api_qiita_items_two_items.json")))) {
+                this.getClass().getClassLoader().getResourceAsStream("web_api_qiita_items_two_items.json"),
+                StandardCharsets.UTF_8))) {
             String line;
             while (null != (line = br.readLine())) sb.append(line);
         }
