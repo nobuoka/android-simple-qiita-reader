@@ -81,7 +81,7 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
         if (mModel == null) return;
         if (mInfo == null) return;
 
-        if (mInfo.doLoadAutomatically()) mModel.requestToLoadItems();
+        if (mInfo.doLoadAutomatically()) mModel.requestToLoadNextPage();
     }
 
 }

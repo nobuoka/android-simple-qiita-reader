@@ -28,6 +28,8 @@ public class QiitaItemListPresentationModel {
     private final Scheduler mMainScheduler;
     private final Scheduler mIoScheduler;
 
+    private int mCurrentPage = 0;
+
     private final BehaviorSubject<LoadingState> mQiitaItemsLoadingStateBehaviorSubject =
             BehaviorSubject.create(LoadingState.NOT_STARTED_YET);
 
@@ -56,7 +58,7 @@ public class QiitaItemListPresentationModel {
         return mQiitaItemsHasNextPageBehaviorSubject;
     }
 
-    public void requestToLoadItems() {
+    public void requestToLoadNextPage() {
         // TODO : Scheduler に乗せて Subscription に値を送出するのをいい感じに書く。
         // 今はやり方がわからないのでとりあえずこうしてる。
         // メモ : スケジューラに乗せて非同期に呼ばないと RecyclerView.Adapter の onViewAttachedToWindow
@@ -69,7 +71,8 @@ public class QiitaItemListPresentationModel {
                 mQiitaItemsLoadingStateBehaviorSubject.onNext(LoadingState.LOADING);
             }
         });
-        mQiitaItemListLoader.getQiitaItemList()
+        final int loadingPage = mCurrentPage + 1;
+        mQiitaItemListLoader.getQiitaItemList(loadingPage)
                 .subscribeOn(mIoScheduler)
                 .observeOn(mMainScheduler)
                 .subscribe(new SingleSubscriber<List<QiitaItem>>() {
@@ -77,6 +80,14 @@ public class QiitaItemListPresentationModel {
                     public void onSuccess(List<QiitaItem> value) {
                         mQiitaItems.addAll(value);
                         mQiitaItemsLoadingStateBehaviorSubject.onNext(LoadingState.SUCCESS);
+                        mCurrentPage = loadingPage;
+                        // TODO : レスポンスヘッダを見て次ページの有無を確認する。
+                        // とりあえずはレスポンスの配列が空の場合と 5 ページ目まで読み込んだ場合は次ページはないことにする。
+                        if (value.size() == 0 || mCurrentPage >= 5) {
+                            mQiitaItemsHasNextPageBehaviorSubject.onNext(NextPageExistence.NOT_EXIST);
+                        } else {
+                            mQiitaItemsHasNextPageBehaviorSubject.onNext(NextPageExistence.UNKNOWN);
+                        }
                     }
                     @Override
                     public void onError(Throwable error) {

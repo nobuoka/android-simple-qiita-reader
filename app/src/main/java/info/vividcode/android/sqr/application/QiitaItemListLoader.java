@@ -7,6 +7,6 @@ import rx.Single;
 
 public interface QiitaItemListLoader {
 
-    Single<List<QiitaItem>> getQiitaItemList();
+    Single<List<QiitaItem>> getQiitaItemList(int page);
 
 }

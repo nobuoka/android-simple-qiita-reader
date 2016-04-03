@@ -49,7 +49,7 @@ public class WebApiQiitaItemListLoaderTest {
         mMockWebServer.enqueue(new MockResponse().setBody("[]"));
 
         TestSubscriber<List<QiitaItem>> testSubscriber = new TestSubscriber<>();
-        mTestTargetLoader.getQiitaItemList().subscribe(testSubscriber);
+        mTestTargetLoader.getQiitaItemList(1).subscribe(testSubscriber);
 
         testSubscriber.awaitTerminalEvent(5, TimeUnit.SECONDS);
         testSubscriber.assertTerminalEvent();
@@ -69,7 +69,7 @@ public class WebApiQiitaItemListLoaderTest {
         mMockWebServer.enqueue(new MockResponse().setBody(sb.toString()));
 
         TestSubscriber<List<QiitaItem>> testSubscriber = new TestSubscriber<>();
-        mTestTargetLoader.getQiitaItemList().subscribe(testSubscriber);
+        mTestTargetLoader.getQiitaItemList(1).subscribe(testSubscriber);
 
         testSubscriber.awaitTerminalEvent(5, TimeUnit.SECONDS);
         testSubscriber.assertTerminalEvent();
@@ -121,7 +121,7 @@ public class WebApiQiitaItemListLoaderTest {
         mMockWebServer.enqueue(new MockResponse().setResponseCode(500).setBody("Internal Error"));
 
         TestSubscriber<List<QiitaItem>> testSubscriber = new TestSubscriber<>();
-        mTestTargetLoader.getQiitaItemList().subscribe(testSubscriber);
+        mTestTargetLoader.getQiitaItemList(1).subscribe(testSubscriber);
 
         testSubscriber.awaitTerminalEvent(5, TimeUnit.SECONDS);
         testSubscriber.assertTerminalEvent();

@@ -59,7 +59,7 @@ public class QiitaItemListPresentationModelTest {
          */
         public final BlockingDeque<Integer> responseWaiter = new LinkedBlockingDeque<>();
         @Override
-        public Single<List<QiitaItem>> getQiitaItemList() {
+        public Single<List<QiitaItem>> getQiitaItemList(int page) {
             return Single.create(new Single.OnSubscribe<List<QiitaItem>>() {
                 @Override
                 public void call(SingleSubscriber<? super List<QiitaItem>> singleSubscriber) {
@@ -75,8 +75,12 @@ public class QiitaItemListPresentationModelTest {
         }
     }
 
+    /**
+     * TODO : 次ページ読み込みを行った場合に、正しく次ページをリクエストすることのテスト。
+     * TODO : 次ページ読み込みを行ってエラーが返ってきた場合に、ページ番号が繰り上げられないことのテスト。
+     */
     @Test
-    public void requestToLoadItems_usual() throws InterruptedException {
+    public void requestToLoadNextPage_usual() throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(2);
         try {
             Scheduler s = Schedulers.from(executor);
@@ -100,7 +104,7 @@ public class QiitaItemListPresentationModelTest {
                     emptyList(),
                     qiitaItemList);
 
-            model.requestToLoadItems();
+            model.requestToLoadNextPage();
             assertEquals("読み込みのリクエストを行うと LOADING 状態。",
                     LoadingState.LOADING, deq.poll(2, TimeUnit.SECONDS));
             testLoader.responseWaiter.add(0);
@@ -114,7 +118,7 @@ public class QiitaItemListPresentationModelTest {
                     new Object[0], deq.toArray());
 
 
-            model.requestToLoadItems();
+            model.requestToLoadNextPage();
             assertEquals("再度読み込みのリクエストを行うと LOADING 状態。",
                     LoadingState.LOADING, deq.poll(2, TimeUnit.SECONDS));
             testLoader.responseWaiter.add(0);
@@ -128,7 +132,7 @@ public class QiitaItemListPresentationModelTest {
                     new Object[0], deq.toArray());
 
             assertArrayEquals("空になっている。", new Object[0], deq.toArray());
-            model.requestToLoadItems();
+            model.requestToLoadNextPage();
             assertEquals("再度読み込みのリクエストを行うと LOADING 状態。",
                     LoadingState.LOADING, deq.poll(2, TimeUnit.SECONDS));
             testLoader.responseWaiter.add(1); // エラーを返すように。
