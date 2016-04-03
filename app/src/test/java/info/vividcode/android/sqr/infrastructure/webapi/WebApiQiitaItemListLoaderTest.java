@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +86,7 @@ public class WebApiQiitaItemListLoaderTest {
                         "2016-04-03T12:34:56+09:00",
                         false,
                         "http://example.com/test-url-1",
-                        singletonList(new Tag("Electron", Collections.<String>emptyList())),
+                        new ArrayList<>(singletonList(new Tag("Electron", new ArrayList<String>()))),
                         new User(
                                 "test-taro",
                                 "テスト 太郎",
@@ -104,7 +105,7 @@ public class WebApiQiitaItemListLoaderTest {
                         "2016-04-03T10:00:00+09:00",
                         false,
                         "http://example.com/test-url-2",
-                        singletonList(new Tag("Android", Collections.<String>emptyList())),
+                        new ArrayList<>(singletonList(new Tag("Android", new ArrayList<String>()))),
                         new User(
                                 "test-taro",
                                 "テスト 太郎",
