@@ -1,10 +1,5 @@
 package info.vividcode.android.sqr.presentation;
 
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-
-import java.util.Arrays;
-
 import info.vividcode.android.cra.Binder;
 import info.vividcode.android.cra.Component;
 import info.vividcode.android.cra.ComponentsRecyclerAdapter;
