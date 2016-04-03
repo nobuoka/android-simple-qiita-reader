@@ -17,7 +17,7 @@
         android:paddingLeft="@dimen/item_horizontal_padding"
         android:paddingRight="@dimen/item_horizontal_padding"
         android:background="?selectableItemBackground"
-        android:onClick="@{handler.onClick}">
+        android:onClick="@{handler::onClick}">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
