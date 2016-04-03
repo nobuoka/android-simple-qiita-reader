@@ -28,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mAdapter = new QiitaItemListAdapter();
+        mAdapter = new QiitaItemListAdapter(new QiitaItemListAdapter.EventListeners() {
+            @Override
+            public void onRequestNextPage() {
+                mModel.requestToLoadItems();
+            }
+        });
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(mAdapter);
     }
@@ -37,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAdapter.getQiitaItemListReferenceComponent().setList(mModel.getObservableQiitaItemList());
-
-        mModel.requestToLoadItems();
+        mAdapter.getNextPageControlComponent().subscribeToModel(mModel);
     }
 
     @Override
     protected void onStop() {
+        mAdapter.getNextPageControlComponent().unsubscribeToModel();
         mAdapter.getQiitaItemListReferenceComponent().setList(null);
         super.onStop();
     }

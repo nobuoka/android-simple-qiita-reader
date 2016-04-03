@@ -1,5 +1,6 @@
 package info.vividcode.android.sqr.presentation;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -7,8 +8,13 @@ import info.vividcode.android.cra.Binder;
 import info.vividcode.android.cra.Component;
 import info.vividcode.android.cra.ComponentsRecyclerAdapter;
 import info.vividcode.android.cra.FixedViewTypeBinderPairProvider;
+import info.vividcode.android.cra.components.ComponentSeries;
 import info.vividcode.android.cra.components.ObservableListReferenceComponent;
 import info.vividcode.android.sqr.dto.QiitaItem;
+import info.vividcode.android.sqr.presentation.models.LoadingState;
+import info.vividcode.android.sqr.presentation.presenters.NextPageControlComponent;
+import info.vividcode.android.sqr.presentation.presenters.NextPageControlInfo;
+import info.vividcode.android.sqr.presentation.viewholders.NextPageControlViewHolder;
 import info.vividcode.android.sqr.presentation.viewholders.QiitaItemViewHolder;
 
 public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
@@ -28,14 +34,47 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
                     });
                 }
             }));
+    private final NextPageControlComponent mQiitaItemListNextPageControlComponent =
+            new NextPageControlComponent(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.nextPageControl, new Binder<NextPageControlViewHolder, NextPageControlInfo>() {
+                @Override
+                public void bindViewHolder(NextPageControlViewHolder holder, Component<NextPageControlInfo> component, int positionInComponent) {
+                    //holder.binding;
+                    Log.d("xxx", "bindView holder control!!!");
+                }
+            }));
 
-    public QiitaItemListAdapter() {
+    private final EventListeners mEventListener;
+
+    public QiitaItemListAdapter(EventListeners eventListeners) {
         super(VIEW_TYPES);
-        setComponent(mQiitaItemListComponent);
+        mEventListener = eventListeners;
+
+        ComponentSeries cs = new ComponentSeries();
+        cs.addChildComponent(mQiitaItemListComponent);
+        cs.addChildComponent(mQiitaItemListNextPageControlComponent);
+        setComponent(cs);
     }
 
     public ObservableListReferenceComponent<QiitaItem> getQiitaItemListReferenceComponent() {
         return mQiitaItemListComponent;
+    }
+
+    public NextPageControlComponent getNextPageControlComponent() {
+        return mQiitaItemListNextPageControlComponent;
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (holder instanceof NextPageControlViewHolder) {
+            if (mQiitaItemListNextPageControlComponent.getItem(0).loadingState != LoadingState.LOADING) {
+                mEventListener.onRequestNextPage();
+            }
+        }
+    }
+
+    public interface EventListeners {
+        void onRequestNextPage();
     }
 
 }
