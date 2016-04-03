@@ -1,5 +1,8 @@
 package info.vividcode.android.sqr.presentation;
 
+import android.util.Log;
+import android.view.View;
+
 import info.vividcode.android.cra.Binder;
 import info.vividcode.android.cra.Component;
 import info.vividcode.android.cra.ComponentsRecyclerAdapter;
@@ -17,6 +20,12 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
                 @Override
                 public void bindViewHolder(QiitaItemViewHolder holder, Component<QiitaItem> component, int positionInComponent) {
                     holder.binding.setItem(component.getItem(positionInComponent));
+                    holder.binding.setHandler(new OnItemClickHandler() {
+                        @Override
+                        public void onClick(View item) {
+                            Log.d("xx", "clicked!!!!");
+                        }
+                    });
                 }
             }));
 

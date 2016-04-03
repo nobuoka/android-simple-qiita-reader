@@ -4,11 +4,20 @@
         <variable
             name="item"
             type="info.vividcode.android.sqr.dto.QiitaItem"/>
+        <variable
+            name="handler"
+            type="info.vividcode.android.sqr.presentation.OnItemClickHandler"/>
     </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/item_vertical_padding"
+        android:paddingBottom="@dimen/item_vertical_padding"
+        android:paddingLeft="@dimen/item_horizontal_padding"
+        android:paddingRight="@dimen/item_horizontal_padding"
+        android:background="?selectableItemBackground"
+        android:onClick="@{handler.onClick}">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
