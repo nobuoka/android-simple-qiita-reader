@@ -1,7 +1,6 @@
 package info.vividcode.android.sqr;
 
 import android.databinding.DataBindingUtil;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,7 @@ import info.vividcode.android.sqr.di.AppComponent;
 import info.vividcode.android.sqr.di.DaggerAppComponent;
 import info.vividcode.android.sqr.di.QiitaWebApiModule;
 import info.vividcode.android.sqr.dto.QiitaItem;
-import info.vividcode.android.sqr.presentation.QiitaItemListAdapter;
+import info.vividcode.android.sqr.presentation.presenters.QiitaItemListAdapter;
 import info.vividcode.android.sqr.presentation.models.NextPageExistence;
 import info.vividcode.android.sqr.presentation.models.QiitaItemListPresentationModel;
 

@@ -6,7 +6,7 @@
             type="info.vividcode.android.sqr.dto.QiitaItem"/>
         <variable
             name="handler"
-            type="info.vividcode.android.sqr.presentation.OnItemClickHandler"/>
+            type="info.vividcode.android.sqr.presentation.presenters.OnItemClickHandler"/>
     </data>
     <LinearLayout
         android:orientation="vertical"

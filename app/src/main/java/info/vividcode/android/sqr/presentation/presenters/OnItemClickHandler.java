@@ -1,4 +1,4 @@
-package info.vividcode.android.sqr.presentation;
+package info.vividcode.android.sqr.presentation.presenters;
 
 import android.view.View;
 

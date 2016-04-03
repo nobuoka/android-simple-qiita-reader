@@ -1,4 +1,4 @@
-package info.vividcode.android.sqr.presentation;
+package info.vividcode.android.sqr.presentation.presenters;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,8 +11,7 @@ import info.vividcode.android.cra.FixedViewTypeBinderPairProvider;
 import info.vividcode.android.cra.components.ComponentSeries;
 import info.vividcode.android.cra.components.ObservableListReferenceComponent;
 import info.vividcode.android.sqr.dto.QiitaItem;
-import info.vividcode.android.sqr.presentation.presenters.NextPageControlComponent;
-import info.vividcode.android.sqr.presentation.presenters.NextPageControlInfo;
+import info.vividcode.android.sqr.presentation.viewholders.AppViewTypes;
 import info.vividcode.android.sqr.presentation.viewholders.NextPageControlViewHolder;
 import info.vividcode.android.sqr.presentation.viewholders.QiitaItemViewHolder;
 
