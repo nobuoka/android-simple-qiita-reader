@@ -1,1 +1,2 @@
 include ':app'
+include ':modules:cra', ':modules:cra:library', ':modules:cra:library:core', ':modules:cra:library:databinding'

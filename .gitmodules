@@ -1,0 +1,3 @@
+[submodule "modules/cra"]
+	path = modules/cra
+	url = https://github.com/nobuoka/ComponentsRecyclerAdapter.git
