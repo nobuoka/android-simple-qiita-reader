@@ -78,7 +78,6 @@ public class QiitaItemListPresentationModel {
                 .subscribe(new SingleSubscriber<List<QiitaItem>>() {
                     @Override
                     public void onSuccess(List<QiitaItem> value) {
-                        mQiitaItems.addAll(value);
                         mQiitaItemsLoadingStateBehaviorSubject.onNext(LoadingState.SUCCESS);
                         mCurrentPage = loadingPage;
                         // TODO : レスポンスヘッダを見て次ページの有無を確認する。
@@ -88,6 +87,7 @@ public class QiitaItemListPresentationModel {
                         } else {
                             mQiitaItemsHasNextPageBehaviorSubject.onNext(NextPageExistence.UNKNOWN);
                         }
+                        mQiitaItems.addAll(value);
                     }
                     @Override
                     public void onError(Throwable error) {
