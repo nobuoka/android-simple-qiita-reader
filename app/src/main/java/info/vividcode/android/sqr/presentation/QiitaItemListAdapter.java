@@ -1,26 +1,42 @@
 package info.vividcode.android.sqr.presentation;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 
-import info.vividcode.android.sqr.databinding.ItemQiitaItemBinding;
+import java.util.Arrays;
 
-public class QiitaItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import info.vividcode.android.cra.Binder;
+import info.vividcode.android.cra.Component;
+import info.vividcode.android.cra.ComponentsRecyclerAdapter;
+import info.vividcode.android.cra.FixedViewTypeBinderPairProvider;
+import info.vividcode.android.cra.components.ObservableListReferenceComponent;
+import info.vividcode.android.sqr.dto.QiitaItem;
+import info.vividcode.android.sqr.presentation.viewholders.QiitaItemViewHolder;
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemQiitaItemBinding b = ItemQiitaItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new RecyclerView.ViewHolder(b.getRoot()) {};
+public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
+
+    private static final AppViewTypes VIEW_TYPES = AppViewTypes.INSTANCE;
+
+    private final ObservableListReferenceComponent<QiitaItem> mQiitaItemListComponent =
+            new ObservableListReferenceComponent<>(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.qiitaItem, new Binder<QiitaItemViewHolder, QiitaItem>() {
+                @Override
+                public void bindViewHolder(QiitaItemViewHolder holder, Component<QiitaItem> component, int positionInComponent) {
+                    // TODO : View にデータを反映させる。
+                }
+            }));
+
+    public QiitaItemListAdapter() {
+        super(VIEW_TYPES);
+        setComponent(mQiitaItemListComponent);
+
+        // 仮のデータ。
+        ObservableList<QiitaItem> items = new ObservableArrayList<>();
+        items.addAll(Arrays.<QiitaItem>asList(null, null, null, null));
+        mQiitaItemListComponent.setList(items);
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-    }
-
-    @Override
-    public int getItemCount() {
-        return 4;
+    public ObservableListReferenceComponent<QiitaItem> getQiitaItemListReferenceComponent() {
+        return mQiitaItemListComponent;
     }
 
 }
