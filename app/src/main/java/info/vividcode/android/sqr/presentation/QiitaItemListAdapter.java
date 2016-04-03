@@ -21,7 +21,7 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
             new ObservableListReferenceComponent<>(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.qiitaItem, new Binder<QiitaItemViewHolder, QiitaItem>() {
                 @Override
                 public void bindViewHolder(QiitaItemViewHolder holder, Component<QiitaItem> component, int positionInComponent) {
-                    // TODO : View にデータを反映させる。
+                    holder.binding.setItem(component.getItem(positionInComponent));
                 }
             }));
 
