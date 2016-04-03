@@ -20,6 +20,9 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
 
     private static final AppViewTypes VIEW_TYPES = AppViewTypes.INSTANCE;
 
+    /**
+     * Qiita の投稿一覧のリストを扱うコンポーネント。
+     */
     private final ObservableListReferenceComponent<QiitaItem> mQiitaItemListComponent =
             new ObservableListReferenceComponent<>(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.qiitaItem, new Binder<QiitaItemViewHolder, QiitaItem>() {
                 @Override
@@ -33,6 +36,10 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
                     });
                 }
             }));
+
+    /**
+     * 次ページ読み込みの表示を扱うコンポーネント。
+     */
     private final NextPageControlComponent mQiitaItemListNextPageControlComponent =
             new NextPageControlComponent(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.nextPageControl, new Binder<NextPageControlViewHolder, NextPageControlInfo>() {
                 @Override

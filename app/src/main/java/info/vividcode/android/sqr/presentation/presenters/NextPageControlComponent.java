@@ -2,6 +2,7 @@ package info.vividcode.android.sqr.presentation.presenters;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import info.vividcode.android.cra.ViewTypeBinderPairProvider;
 import info.vividcode.android.cra.components.AbstractLeafComponent;
@@ -35,7 +36,7 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
 
     @Override
     public int getItemCount() {
-        return (mInfo != null && mInfo.viewType() != NextPageControlViewType.NONE ? 1 : 0);
+        return (mInfo == null || mInfo.doShowNothing() ? 0 : 1);
     }
 
     @Override
@@ -43,7 +44,8 @@ public final class NextPageControlComponent extends AbstractLeafComponent<NextPa
         return mInfo;
     }
 
-    private void updateNextPageControlInfo(NextPageControlInfo info) {
+    @VisibleForTesting
+    void updateNextPageControlInfo(NextPageControlInfo info) {
         if (getItemCount() == 1) getObservable().notifyItemRangeRemoved(0, 1);
         mInfo = info;
         if (getItemCount() == 1) getObservable().notifyItemRangeInserted(0, 1);
