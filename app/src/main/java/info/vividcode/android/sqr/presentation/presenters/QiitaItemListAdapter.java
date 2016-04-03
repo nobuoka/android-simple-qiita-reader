@@ -1,7 +1,7 @@
 package info.vividcode.android.sqr.presentation.presenters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import info.vividcode.android.cra.Binder;
@@ -10,6 +10,7 @@ import info.vividcode.android.cra.ComponentsRecyclerAdapter;
 import info.vividcode.android.cra.FixedViewTypeBinderPairProvider;
 import info.vividcode.android.cra.components.ComponentSeries;
 import info.vividcode.android.cra.components.ObservableListReferenceComponent;
+import info.vividcode.android.sqr.QiitaItemDetailActivity;
 import info.vividcode.android.sqr.dto.QiitaItem;
 import info.vividcode.android.sqr.presentation.viewholders.AppViewTypes;
 import info.vividcode.android.sqr.presentation.viewholders.NextPageControlViewHolder;
@@ -26,11 +27,13 @@ public class QiitaItemListAdapter extends ComponentsRecyclerAdapter {
             new ObservableListReferenceComponent<>(new FixedViewTypeBinderPairProvider<>(VIEW_TYPES.qiitaItem, new Binder<QiitaItemViewHolder, QiitaItem>() {
                 @Override
                 public void bindViewHolder(QiitaItemViewHolder holder, Component<QiitaItem> component, int positionInComponent) {
-                    holder.binding.setItem(component.getItem(positionInComponent));
+                    final QiitaItem item = component.getItem(positionInComponent);
+                    holder.binding.setItem(item);
                     holder.binding.setHandler(new OnItemClickHandler() {
                         @Override
-                        public void onClick(View item) {
-                            Log.d("xx", "clicked!!!!");
+                        public void onClick(View view) {
+                            Context ctx = view.getContext();
+                            ctx.startActivity(QiitaItemDetailActivity.createIntent(ctx, item));
                         }
                     });
                 }
