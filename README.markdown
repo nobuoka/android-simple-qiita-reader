@@ -35,10 +35,10 @@ Android アプリ 「Simple Qiita Reader」
 
 [ComponentRecyclerAdapter](https://github.com/nobuoka/ComponentsRecyclerAdapter)
 という自作のライブラリを Git サブモジュールとして追加しています。
-下記のように `--submodule` オプションを付けて clone するなどして、サブモジュールも clone してください。
+下記のように `--recursive` オプションを付けて clone するなどして、サブモジュールも clone してください。
 
 ```
-git clone --submodule https://github.com/nobuoka/android-simple-qiita-reader
+git clone --recursive https://github.com/nobuoka/android-simple-qiita-reader
 ```
 
 環境変数 `ANDROID_HOME` を指定すれば (必要な Android SDK コンポーネントがインストール済みであれば)
