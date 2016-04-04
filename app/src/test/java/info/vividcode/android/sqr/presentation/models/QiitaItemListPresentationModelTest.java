@@ -110,6 +110,7 @@ public class QiitaItemListPresentationModelTest {
             testLoader.responseWaiter.add(0);
             assertEquals("読み込みが終了すると SUCCESS 状態。",
                     LoadingState.SUCCESS, deq.poll(2, TimeUnit.SECONDS));
+            Thread.sleep(50); // リスト変更の待ち合わせができないので待機。 TODO : 待ち合わせできるような設計にする。
             assertEquals("読み込みが完了すると、結果がリストの中に格納される。",
                     singletonList(mResponseQiitaItem),
                     qiitaItemList);
@@ -123,6 +124,7 @@ public class QiitaItemListPresentationModelTest {
             testLoader.responseWaiter.add(0);
             assertEquals("読み込みが終了すると SUCCESS 状態。",
                     LoadingState.SUCCESS, deq.poll(2, TimeUnit.SECONDS));
+            Thread.sleep(50); // リスト変更の待ち合わせができないので待機。 TODO : 待ち合わせできるような設計にする。
             assertEquals("再度読み込みが実行されるとリストの内容が変更されている。",
                     Arrays.asList(mResponseQiitaItem, mResponseQiitaItem),
                     qiitaItemList);
@@ -137,6 +139,7 @@ public class QiitaItemListPresentationModelTest {
             testLoader.responseWaiter.add(1); // エラーを返すように。
             assertEquals("エラーが返されるので ERROR 状態。",
                     LoadingState.ERROR, deq.poll(2, TimeUnit.SECONDS));
+            Thread.sleep(50); // リスト変更の待ち合わせができないので待機。 TODO : 待ち合わせできるような設計にする。
             assertEquals("再度読み込みが実行されてもエラーが返ってくるとリストに変更はない。",
                     Arrays.asList(mResponseQiitaItem, mResponseQiitaItem),
                     qiitaItemList);
